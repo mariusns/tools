@@ -95,31 +95,7 @@ class piezoelement(mechanic):
         self.name = name
     
     def calc(self):
-        ''' The first part is calculated by it's  super ??'''
-        
-        if self.c33D !=0:
-            # Calc soundspeed using c33d 
-            try:
-                if self.Qc33 != 0 and self.c33D.imag == 0:
-                    self.c33D = self.c33D*(1 + 1j/self.Qc33)
-                    
-                self.c = sqrt(self.c33D/self.rho)
-                
-            except ZeroDivisionError:
-                pass
-        else:  
-            try:
-                self.c = self.c*(1 + 1j/(2*self.Qc33))
-            except ZeroDivisionError:
-                pass
-               
-        self.A = pi*self.r**2;
-        self.Z0s = self.rho*self.c;
-        self.Z0 = self.Z0s*self.A;
-        try:
-            self.Al = self.A/self.l
-        except ZeroDivisionError:
-            self.Al = 0
+	super().calc()
         
         self.eps_33S = self.eps_33S_rel*self.eps_0*(1 - 1j*self.tandeps)
         ''' Set e33 or kt '''
